@@ -55,7 +55,7 @@
               inherit (finalAttrs) pname version src prePnpmInstall;
               inherit pnpm;
               fetcherVersion = 3;
-              hash = "sha256-5SgY5W5xrY2p8DN9fZ38SNhR+BIXm7hOXILpfyQcRsQ=";
+              hash = "";
             };
 
             buildPhase = ''
