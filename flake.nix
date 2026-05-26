@@ -37,11 +37,13 @@
               pkgs.makeWrapper
               pkgs.python3 # node-gyp
               pkgs.pkg-config
+              pkgs.nodePackages.node-gyp
             ];
 
             buildInputs = [
               pkgs.vips # sharp
               pkgs.postgresql # embedded-postgres runtime
+              pkgs.sqlite
             ];
 
             # Hoist all deps to root node_modules so Node ESM resolution works
@@ -60,6 +62,12 @@
 
             buildPhase = ''
               runHook preBuild
+
+              # Rebuild native sqlite3 addon against Nix-provided sqlite
+              pushd node_modules/.pnpm/sqlite3@5.1.7/node_modules/sqlite3
+              node-gyp rebuild
+              popd
+
               pnpm --filter @paperclipai/shared build
               pnpm --filter @paperclipai/db build
               pnpm --filter @paperclipai/adapter-utils build
