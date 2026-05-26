@@ -37,7 +37,7 @@
               pkgs.makeWrapper
               pkgs.python3 # node-gyp
               pkgs.pkg-config
-              pkgs.nodePackages.node-gyp
+              pkgs.node-gyp
             ];
 
             buildInputs = [
