@@ -274,7 +274,8 @@ in
     systemd.services.paperclip = {
       description = "Paperclip AI agent orchestration platform";
       wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      after = [ "network.target" "postgresql.service" ];
+      requres = [ "postgresql.service" ];
 
       environment = {
         PAPERCLIP_HOME = cfg.stateDir;
